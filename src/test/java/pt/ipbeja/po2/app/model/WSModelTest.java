@@ -1,9 +1,9 @@
-package ${IJ_BASE_PACKAGE}.po2.app.model;
+package pt.ipbeja.po2.app.model;
 
 import org.junit.jupiter.api.Test;
-import ${IJ_BASE_PACKAGE}.app.model.MessageToUI;
-import ${IJ_BASE_PACKAGE}.app.model.WSModel;
-import ${IJ_BASE_PACKAGE}.app.model.WSView;
+import pt.ipbeja.app.model.MessageToUI;
+import pt.ipbeja.app.model.WSModel;
+import pt.ipbeja.app.model.WSView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

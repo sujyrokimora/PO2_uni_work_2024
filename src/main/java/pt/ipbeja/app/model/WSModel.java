@@ -1,4 +1,4 @@
-package ${IJ_BASE_PACKAGE}.app.model;
+package pt.ipbeja.app.model;
 
 
 import java.util.ArrayList;

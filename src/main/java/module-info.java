@@ -1,5 +1,5 @@
-module ${IJ_BASE_PACKAGE} {
+module pt.ipbeja {
     requires javafx.controls;
-    exports ${IJ_BASE_PACKAGE}.app.ui;
+    exports pt.ipbeja.app.ui;
 
 }

@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>${IJ_BASE_PACKAGE}.po2</groupId>
-    <artifactId>${IJ_PROJECT_NAME}</artifactId>
+    <groupId>pt.ipbeja.po2</groupId>
+    <artifactId>SopaLetras</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>${IJ_PROJECT_NAME}</name>
+    <name>SopaLetras</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,13 +24,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>#[[\$]]#{junit.version}</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>#[[\$]]#{junit.version}</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -56,7 +56,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ${IJ_BASE_PACKAGE}.po2.javafxpo2template/${IJ_BASE_PACKAGE}.app.ui.HelloApplication
+                                pt.ipbeja.po2.javafxpo2template/pt.ipbeja.app.ui.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

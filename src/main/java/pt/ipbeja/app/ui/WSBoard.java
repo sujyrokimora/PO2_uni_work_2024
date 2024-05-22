@@ -1,4 +1,4 @@
-package ${IJ_BASE_PACKAGE}.app.ui;
+package pt.ipbeja.app.ui;
 
 
 import javafx.collections.ObservableList;
@@ -6,10 +6,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import ${IJ_BASE_PACKAGE}.app.model.MessageToUI;
-import ${IJ_BASE_PACKAGE}.app.model.Position;
-import ${IJ_BASE_PACKAGE}.app.model.WSModel;
-import ${IJ_BASE_PACKAGE}.app.model.WSView;
+import pt.ipbeja.app.model.MessageToUI;
+import pt.ipbeja.app.model.Position;
+import pt.ipbeja.app.model.WSModel;
+import pt.ipbeja.app.model.WSView;
 
 
 /**

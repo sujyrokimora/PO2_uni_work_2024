@@ -1,9 +1,12 @@
-package ${IJ_BASE_PACKAGE}.app.ui;
+package pt.ipbeja.app.ui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ${IJ_BASE_PACKAGE}.app.model.WSModel;
+import pt.ipbeja.app.model.BoardContent;
+import pt.ipbeja.app.model.WSModel;
+
+import java.io.IOException;
 
 /**
  * Start a game with a hardcoded board
@@ -13,19 +16,25 @@ import ${IJ_BASE_PACKAGE}.app.model.WSModel;
 public class StartWordSearch extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
 
-        final String boardContent =
+       /* final String boardContent =
                 """
                 CASAIAED
                 FFWFMERW
                 WIQFELAA
                 OFLFESFI
-                EFFAFFPP""";
+                EFFAFFPP""";*/
+        //WSModel WSModel = new WSModel(boardContent);
 
-        WSModel WSModel = new WSModel(boardContent);
+        BoardContent b = new BoardContent(7,8);
+        Character[][] bb = b.Board();
+        String bbb = b.BoardToString(bb);
+
+        WSModel WSModel = new WSModel(bbb);
 
         WSBoard WSBoard = new WSBoard(WSModel);
+
         primaryStage.setScene(new Scene(WSBoard));
 
         WSModel.registerView(WSBoard);
