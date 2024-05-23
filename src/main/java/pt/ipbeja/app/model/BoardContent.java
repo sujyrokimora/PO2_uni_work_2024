@@ -12,18 +12,17 @@ import java.util.Random;
 public class BoardContent {
     private int col;
     private int line;
+    private static List<String> words;
 
-    //private  Character[][] boardMatrix;
     public BoardContent(int line, int col) {
         this.col = col;
         this.line = line;
-        //this.boardMatrix = new Character[this.line][this.col];
     }
 
     public Character[][] Board() throws IOException {
         Character[][] boardMatrix = new Character[this.line][this.col];
 
-        List<String> words = Words();
+        this.words = Words();
         Random random = new Random();
         int control = 0;
 
@@ -65,8 +64,8 @@ public class BoardContent {
         String letters = "ABCDEFGHIJKLMNOPKRSTUVWXYZ";
         Random random = new Random();
         int randomInt = random.nextInt(letters.length());
-        //return letters.charAt(randomInt);
-        return 'a';
+        return letters.charAt(randomInt);
+        //return 'a';
     }
 
     public List<String> Words() throws IOException { //https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
@@ -143,5 +142,17 @@ public class BoardContent {
                 }
             }
         return matrix;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public static List<String> getWords() {
+        return words;
     }
 }

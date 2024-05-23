@@ -2,14 +2,15 @@ package pt.ipbeja.app.ui;
 
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import pt.ipbeja.app.model.MessageToUI;
-import pt.ipbeja.app.model.Position;
-import pt.ipbeja.app.model.WSModel;
-import pt.ipbeja.app.model.WSView;
+import pt.ipbeja.app.model.*;
 
 
 /**
@@ -34,14 +35,11 @@ public class WSBoard extends GridPane implements WSView {
      */
     private void buildGUI() {
         assert (this.wsModel != null);
-
         // create one label for each position
         for (int line = 0; line < this.wsModel.nLines(); line++) {
             for (int col = 0; col < this.wsModel.nCols(); col++) {
                 String textForButton = this.wsModel.textInPosition(new Position(line, col));
-                Button button = new Button(textForButton);
-                button.setMinWidth(SQUARE_SIZE);
-                button.setMinHeight(SQUARE_SIZE);
+                Letter button = new Letter(textForButton, line, col);
                 this.add(button, col, line); // add button to GridPane
             }
         }

@@ -1,6 +1,8 @@
 package pt.ipbeja.app.model;
 
 
+import pt.ipbeja.app.ui.Letter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +12,6 @@ import java.util.List;
  * @version 2024/04/14
  */
 public class WSModel {
-
-
     // The following matrix could also be List<List<Character>>
     // for a more complex game, it should be a List<List<Cell>>
     // where Letter is a class with the letter and other attributes
@@ -43,7 +43,6 @@ public class WSModel {
         return this.lettersGrid.get(position.line()).get(position.col());
     }
 
-
     /**
      * Check if all words were found
      * @return  true if all words were found
@@ -58,9 +57,12 @@ public class WSModel {
      * @param word
      * @return true if the word is in the board
      */
-    public String wordFound(String word) {
-        // TODO implement this method
-        return word;
+    public static String wordFound(String word) {
+        List<String> words = BoardContent.getWords();
+        for (String s : words) {
+            if (s.equals(word)) return word;
+        }
+        return "0";
     }
 
     /**
@@ -69,7 +71,21 @@ public class WSModel {
      * @return  true if the word with wildcard is in the board
      */
     public String wordWithWildcardFound(String word) {
-        // TODO implement this method
-        return word;
+        List<String> words = BoardContent.getWords();
+        int control = 1;
+        for (String s : words) {
+            if(s.length()==word.length()) {
+                for(int i = 0; i < s.length(); i++){
+                    if(s.charAt(i)==word.charAt(i) || s.charAt(i)=='*')control = control + 1;
+                }
+                if(control==word.length()) return s;
+                control = 1;
+            }
+        }
+        return "0";
+    }
+
+    public void updater(Position pos){
+
     }
 }
