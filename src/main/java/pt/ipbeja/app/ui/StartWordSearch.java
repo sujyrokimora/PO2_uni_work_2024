@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pt.ipbeja.app.model.BoardContent;
 import pt.ipbeja.app.model.WSModel;
-
 import java.io.IOException;
 
 /**
@@ -40,6 +39,7 @@ public class StartWordSearch extends Application {
         WSModel.registerView(WSBoard);
         WSBoard.requestFocus(); // to remove focus from first button
         primaryStage.show();
+
     }
 
     /**

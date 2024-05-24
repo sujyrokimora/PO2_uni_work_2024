@@ -12,6 +12,7 @@ import java.util.Random;
 public class BoardContent {
     private int col;
     private int line;
+    private List<String> words;
 
     //private  Character[][] boardMatrix;
     public BoardContent(int line, int col) {
@@ -23,7 +24,7 @@ public class BoardContent {
     public Character[][] Board() throws IOException {
         Character[][] boardMatrix = new Character[this.line][this.col];
 
-        List<String> words = Words();
+        this.words = Words();
         Random random = new Random();
         int control = 0;
 
@@ -32,12 +33,12 @@ public class BoardContent {
             int l = random.nextInt(this.line + 1);
             int c = random.nextInt(this.col + 1);
 
-            if (Check(words.get(control), l, c, boardMatrix, r)) {
-                boardMatrix = insertWord(words.get(control), l, c, boardMatrix, r);
+            if (Check(this.words.get(control), l, c, boardMatrix, r)) {
+                boardMatrix = insertWord(this.words.get(control), l, c, boardMatrix, r);
                 control++;
             }
 
-        } while (control < words.size());
+        } while (control < this.words.size());
 
         boardMatrix = BoardFill(boardMatrix);
         for(Character[] b: boardMatrix){
@@ -143,5 +144,9 @@ public class BoardContent {
                 }
             }
         return matrix;
+    }
+
+    public List<String> getWords() {
+        return words;
     }
 }

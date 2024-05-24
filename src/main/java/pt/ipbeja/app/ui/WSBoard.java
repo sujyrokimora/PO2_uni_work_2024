@@ -5,11 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import pt.ipbeja.app.model.MessageToUI;
-import pt.ipbeja.app.model.Position;
-import pt.ipbeja.app.model.WSModel;
-import pt.ipbeja.app.model.WSView;
+import javafx.scene.paint.Color;
+import pt.ipbeja.app.model.*;
 
 
 /**
@@ -42,7 +41,16 @@ public class WSBoard extends GridPane implements WSView {
                 Button button = new Button(textForButton);
                 button.setMinWidth(SQUARE_SIZE);
                 button.setMinHeight(SQUARE_SIZE);
+                final int nl=line;
+                final int nc=col;
                 this.add(button, col, line); // add button to GridPane
+                button.setBackground(Background.fill(Color.web(ColorStack.GREEN.getRgbCode())));
+                button.setOnAction(event -> {
+                    ButtonColor b= new ButtonColor(this);
+                    b.changeButton(nl,nc,ColorStack.ALABASTER);
+                    // Add your action logic here
+                });
+
             }
         }
         this.requestFocus();

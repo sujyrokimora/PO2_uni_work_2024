@@ -20,7 +20,7 @@ class WSModelTest {
 
     @Test
     void testWordWithWildcardFound() {
-        WSModel model = new WSModel("MA*A\nEAGH\nISKL\nMSOP");
+        WSModel model = new WSModel("MA*A*A\nEAGH\nISKL\nMSOP");
         this.registerEmptyView(model);
         assertEquals("MALA", model.wordWithWildcardFound("MALA"));
     }
@@ -33,9 +33,6 @@ class WSModelTest {
         assertEquals("CA", model.wordFound("CA"));
         assertTrue(model.allWordsWereFound());
     }
-
-
-
 
     private void registerEmptyView(WSModel model) {
         model.registerView(new WSView() {
