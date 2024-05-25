@@ -1,6 +1,13 @@
 package pt.ipbeja.app.model;
 
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +70,7 @@ public class WSModel {
      * @return true if the word is in the board
      */
     //para modificar same has other
+    //TODO esta mal temos de alterar o nome fazer o codigo
     public String wordFound(String word) {
         List<String> words = BoardContent.getWords();
         for (String s : words) {
@@ -79,6 +87,7 @@ public class WSModel {
      * @return  true if the word with wildcard is in the board
      */
     //para modificar deve percorrer a board e verificar se a palavra se encontra na board
+    //TODO mesmo em cima
     public String wordWithWildcardFound(String word) {
         List<String> words = BoardContent.getWords();
         int control = 1;
@@ -111,7 +120,7 @@ public class WSModel {
         return between;
     }
 
-    public void click(Position position){
+    public void click(Position position) {
         if (this.first==null){
             this.first=position;
             wsView.changeColor(Colors.YELLOW, this.first);
@@ -162,6 +171,61 @@ public class WSModel {
         System.out.println(inverted);
         return inverted;
     }
+
+    /**
+     * Ends the game and displays a dialog for the player to enter their name and save their score.
+     * If the player cancels the exit, the game will continue.
+     * After saving the score, the application will exit.
+     */
+    public void endGame(){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("The games has ended");
+        int words= BoardContent.getWords().size();
+        dialog.setHeaderText("Level completed! U found:"+ wordsFound.size()+" of "+words+"("+(words/wordsFound.size())*100+"%)");
+        dialog.setContentText("Insert your name here:");
+        var input=dialog.showAndWait();
+        if(input.isEmpty()) confirmExit();
+        if(input.get().length()<3){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR!");
+            alert.setContentText("Name cant be null or have less than 3 chars");
+            alert.showAndWait();
+            endGame();
+        }
+        else{
+            savegame(input.get());
+        }
+        System.exit(0);
+    }
+    /**
+     * Confirms the exit of the application.
+     * If the user confirms the exit, the application will exit.
+     * If the user cancels the exit, the game will continue.
+     */
+    public void confirmExit(){
+        Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Abort");
+        alert.setContentText("Are u sure want to exit? Your score wont be saved");
+        var result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.exit(0);
+        }
+        endGame();
+    }
+    /**
+     * Saves the current game state.
+     *
+     * @param name the name associated with the saved game
+     */
+    //name-wordsfound-totalword
+    public void savegame(String name){
+        String content=name+"-"+this.wordsFound.size()+"-"+BoardContent.getWords().size();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt", true))) {
+            writer.newLine();
+            writer.write(content);
+        } catch (Exception ignored) {}
+    }
+
 
     private void updateWordsFound(String word){
         this.wordsFound.add(word);

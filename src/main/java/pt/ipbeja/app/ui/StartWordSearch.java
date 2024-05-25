@@ -18,7 +18,7 @@ public class StartWordSearch extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        BoardContent b = new BoardContent(10,10);
+        BoardContent b = new BoardContent(6,6);
         Character[][] bb = b.Board();
         String bbb = b.BoardToString(bb);
 

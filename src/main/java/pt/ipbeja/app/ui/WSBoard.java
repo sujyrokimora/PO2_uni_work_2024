@@ -5,10 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import pt.ipbeja.app.model.*;
 
 import java.util.List;
@@ -103,12 +101,7 @@ public class WSBoard extends GridPane implements WSView {
             this.getButton(p.line(), p.col()).setText(s);
         }
         if (this.wsModel.allWordsWereFound()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("");
-            alert.setHeaderText("");
-            alert.setContentText("Level completed!");
-            alert.showAndWait();
-            System.exit(0);
+            this.wsModel.endGame();
         }
     }
 
