@@ -7,10 +7,11 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import pt.ipbeja.app.model.*;
+
+import java.util.List;
 
 
 /**
@@ -19,6 +20,7 @@ import pt.ipbeja.app.model.*;
  * @version 2024/04/14
  */
 public class WSBoard extends GridPane implements WSView {
+
     private final WSModel wsModel;
     private static final int SQUARE_SIZE = 80;
 
@@ -36,14 +38,27 @@ public class WSBoard extends GridPane implements WSView {
     private void buildGUI() {
         assert (this.wsModel != null);
         // create one label for each position
+        ButtonHandler bHandler = new ButtonHandler();
         for (int line = 0; line < this.wsModel.nLines(); line++) {
             for (int col = 0; col < this.wsModel.nCols(); col++) {
                 String textForButton = this.wsModel.textInPosition(new Position(line, col));
-                Letter button = new Letter(textForButton, line, col);
+                LetterButton button = new LetterButton(textForButton, line, col);
+                button.setOnAction(bHandler);
                 this.add(button, col, line); // add button to GridPane
             }
         }
         this.requestFocus();
+    }
+
+    public WSModel getWSModel() {
+        return this.wsModel;
+    }
+
+    class ButtonHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            LetterButton buttonClicked = (LetterButton) (actionEvent.getSource());
+            getWSModel().click(buttonClicked.getPosition());        }
     }
 
     /**
@@ -64,6 +79,18 @@ public class WSBoard extends GridPane implements WSView {
         return null;
     }
 
+    private LetterButton getLetterButton(Position position) {
+        ObservableList<Node> children = this.getChildren();
+        for (Node node : children) {
+            if (node instanceof LetterButton) {
+                LetterButton button = (LetterButton) node;
+                if (GridPane.getRowIndex(node) == position.line() && GridPane.getColumnIndex(node) == position.col()) {
+                    return button;
+                }
+            }
+        }
+        return null;
+    }
     /**
      * Simply updates the text for the buttons in the received positions
      *
@@ -84,4 +111,19 @@ public class WSBoard extends GridPane implements WSView {
             System.exit(0);
         }
     }
+
+    @Override
+    public void changeColor(Colors color, Position position) {
+        LetterButton btn = getLetterButton(position);
+        btn.setColor(color);
+    }
+
+    @Override
+    public void wordChangeColor(Colors color, List<Position> positions) {
+        for(int i = 0; i < positions.size(); i++){
+            LetterButton btn = getLetterButton(positions.get(i));
+            btn.setColor(color);
+        }
+    }
+
 }

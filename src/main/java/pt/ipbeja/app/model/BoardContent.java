@@ -22,7 +22,7 @@ public class BoardContent {
     public Character[][] Board() throws IOException {
         Character[][] boardMatrix = new Character[this.line][this.col];
 
-        this.words = Words();
+        this.words = words();
         Random random = new Random();
         int control = 0;
 
@@ -31,36 +31,36 @@ public class BoardContent {
             int l = random.nextInt(this.line + 1);
             int c = random.nextInt(this.col + 1);
 
-            if (Check(words.get(control), l, c, boardMatrix, r)) {
+            if (check(words.get(control), l, c, boardMatrix, r)) {
                 boardMatrix = insertWord(words.get(control), l, c, boardMatrix, r);
                 control++;
             }
 
         } while (control < words.size());
 
-        boardMatrix = BoardFill(boardMatrix);
-        for(Character[] b: boardMatrix){
+        boardMatrix = boardFill(boardMatrix);
+        /*for(Character[] b: boardMatrix){
            for(Character c:b){
                System.out.print(c);
            }
             System.out.println("\n");
-        }
+        }*/
 
         return boardMatrix;
     }
 
-    public Character[][] BoardFill(Character[][] boardMatrix) {
+    public Character[][] boardFill(Character[][] boardMatrix) {
         for (int l = 0; l < this.line; l++) {
             for (int c = 0; c < this.col; c++) {
                 if (boardMatrix[l][c] == null) {
-                    boardMatrix[l][c] = RandomLetter();
+                    boardMatrix[l][c] = randomLetter();
                 }
             }
         }
         return boardMatrix;
     }
 
-    public Character RandomLetter() { //https://www.delftstack.com/howto/java/java-random-character/
+    public Character randomLetter() { //https://www.delftstack.com/howto/java/java-random-character/
         String letters = "ABCDEFGHIJKLMNOPKRSTUVWXYZ";
         Random random = new Random();
         int randomInt = random.nextInt(letters.length());
@@ -68,7 +68,7 @@ public class BoardContent {
         //return 'a';
     }
 
-    public List<String> Words() throws IOException { //https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
+    public List<String> words() throws IOException { //https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
         File file = new File(
                 "../words.txt");
         BufferedReader br
@@ -91,11 +91,11 @@ public class BoardContent {
                 board = board + "\n";
             }
         }
-        System.out.println(board);
+        //System.out.println(board);
         return board;
     }
 
-    public boolean Check(String word, int line, int col, Character[][] matrix, int orientation) { //orientation = 0 = horizontal
+    public boolean check(String word, int line, int col, Character[][] matrix, int orientation) { //orientation = 0 = horizontal
         try {
             int wordSize = word.length() - 1;
             if (orientation == 0) {

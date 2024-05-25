@@ -1,5 +1,10 @@
 package pt.ipbeja.app.model;
 
+
+import pt.ipbeja.app.ui.LetterButton;
+
+import java.util.List;
+
 /**
  * View
  * @author anonymized
@@ -9,4 +14,7 @@ public interface WSView {
 
     void update(MessageToUI messageToUI);
 
+    void changeColor(Colors color, Position pos);
+
+    void wordChangeColor(Colors color, List<Position> positions);
 }

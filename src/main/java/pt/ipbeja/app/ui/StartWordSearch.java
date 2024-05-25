@@ -18,16 +18,7 @@ public class StartWordSearch extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-       /* final String boardContent =
-                """
-                CASAIAED
-                FFWFMERW
-                WIQFELAA
-                OFLFESFI
-                EFFAFFPP""";*/
-        //WSModel WSModel = new WSModel(boardContent);
-
-        BoardContent b = new BoardContent(7,8);
+        BoardContent b = new BoardContent(10,10);
         Character[][] bb = b.Board();
         String bbb = b.BoardToString(bb);
 
